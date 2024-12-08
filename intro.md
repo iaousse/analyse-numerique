@@ -1,5 +1,14 @@
 # Analyse numérique et programmation scientifique
 
+
+
+```{image} qrcode_analyse-numerique.png
+:alt: codeqr
+:class: bg-primary mb-1
+:width: 700px
+:align: center
+```
+
 L'analyse numérique est une discipline fondamentale des mathématiques appliquées qui se concentre sur la résolution des problèmes mathématiques à l'aide de méthodes numériques. Ces approches permettent d'obtenir des solutions approchées pour des problèmes complexes, souvent insolubles analytiquement, tout en garantissant une précision contrôlée.
 
 Ce cours introduit les concepts clés de l'analyse numérique et les méthodes numériques les plus utilisées, tout en adoptant une approche pratique. Il vise à combiner théorie et application pour offrir une compréhension approfondie et directement exploitable.
