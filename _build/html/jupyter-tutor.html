@@ -1,0 +1,804 @@
+
+<!DOCTYPE html>
+
+
+<html lang="fr" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Initiation à Jupyter Notebook &#8212; Cours Analyse Numerique</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=041d0952"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'jupyter-tutor';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Initiation à Python" href="pythontuto.html" />
+    <link rel="prev" title="Analyse numérique et programmation scientifique" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="fr"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Cours Analyse Numerique - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="Cours Analyse Numerique - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Analyse numérique et programmation scientifique
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Initiation à Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythontuto.html">Initiation à Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matplotnumscip.html">Matplotlib, NumPy et SciPy pour le Calcul Scientifique</a></li>
+<li class="toctree-l1"><a class="reference internal" href="repesnbr.html">Représentation des nombres en calcul scientifique</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Dépôt source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fjupyter-tutor.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Ouvrez un problème"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Téléchargez cette page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/jupyter-tutor.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Télécharger le fichier source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimer au format PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Mode plein écran"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Initiation à Jupyter Notebook</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-de-python-et-jupyter-notebook">Installation de Python et Jupyter Notebook</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-1-telechargement-de-python">Étape 1 : Téléchargement de Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-2-installation-de-python">Étape 2 : Installation de Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-windows"><strong>Pour Windows</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-macos"><strong>Pour macOS</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-linux"><strong>Pour Linux</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-3-verification-de-l-installation">Étape 3 : Vérification de l’installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-4-installation-de-jupyter-notebook">Étape 4 : Installation de Jupyter Notebook</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-5-lancement-de-jupyter-notebook">Étape 5 : Lancement de Jupyter Notebook</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-6-configuration-supplementaire">Étape 6 : Configuration supplémentaire</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-colab">Google Colab</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#presentation">Présentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acces-a-google-colab">Accès à Google Colab</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctionnalites-principales">Fonctionnalités principales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chargement-de-fichiers-locaux">Chargement de fichiers locaux</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exportation">Exportation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellules-de-texte">Cellules de texte</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellules-de-code">Cellules de code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#raccourcis-clavier">Raccourcis clavier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sauvegarder-votre-travail">Sauvegarder votre travail</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="initiation-a-jupyter-notebook">
+<h1>Initiation à Jupyter Notebook<a class="headerlink" href="#initiation-a-jupyter-notebook" title="Lien vers cette rubrique">#</a></h1>
+<p>Jupyter Notebook vous offre une manière pratique d’expérimenter avec du code Python, en alternant vos expériences avec des notes et de la documentation. Vous pouvez faire tout cela sans avoir à vous aventurer dans la ligne de commande, et le fichier résultant peut facilement être publié et partagé avec d’autres personnes. Dans ce cours, j’utiliserai Jupyter Notebook pour les exemples en classe, et les notes seront mises à disposition sous forme de Jupyter Notebooks. Certains devoirs seront également donnés sous forme de Jupyter Notebooks.</p>
+<section id="installation-de-python-et-jupyter-notebook">
+<h2>Installation de Python et Jupyter Notebook<a class="headerlink" href="#installation-de-python-et-jupyter-notebook" title="Lien vers cette rubrique">#</a></h2>
+<p>Cette partie présente les étapes nécessaires pour télécharger et installer Python, configurer Jupyter Notebook, et aborder brièvement l’utilisation de Google Colab.</p>
+<hr class="docutils" />
+<section id="etape-1-telechargement-de-python">
+<h3>Étape 1 : Téléchargement de Python<a class="headerlink" href="#etape-1-telechargement-de-python" title="Lien vers cette rubrique">#</a></h3>
+<ol class="arabic simple">
+<li><p>Accéder au site officiel de Python : <a class="reference external" href="https://www.python.org/">https://www.python.org/</a>.</p></li>
+<li><p>Dans la section <strong>Downloads</strong>, sélectionner la version appropriée pour votre système d’exploitation :</p>
+<ul class="simple">
+<li><p><strong>Windows</strong> : fichier <code class="docutils literal notranslate"><span class="pre">.exe</span></code>.</p></li>
+<li><p><strong>macOS</strong> : fichier <code class="docutils literal notranslate"><span class="pre">.pkg</span></code>.</p></li>
+<li><p><strong>Linux</strong> : commande via le gestionnaire de paquets.</p></li>
+</ul>
+</li>
+<li><p>Télécharger le fichier correspondant.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="etape-2-installation-de-python">
+<h3>Étape 2 : Installation de Python<a class="headerlink" href="#etape-2-installation-de-python" title="Lien vers cette rubrique">#</a></h3>
+<section id="pour-windows">
+<h4><strong>Pour Windows</strong><a class="headerlink" href="#pour-windows" title="Lien vers cette rubrique">#</a></h4>
+<ol class="arabic simple">
+<li><p>Double-cliquer sur le fichier téléchargé (<code class="docutils literal notranslate"><span class="pre">python-&lt;version&gt;.exe</span></code>).</p></li>
+<li><p>Cochez l’option <strong>Add Python to PATH</strong> pour faciliter l’exécution de Python depuis le terminal.</p></li>
+<li><p>Cliquer sur <strong>Install Now</strong> et suivre les instructions de l’assistant.</p></li>
+</ol>
+</section>
+<section id="pour-macos">
+<h4><strong>Pour macOS</strong><a class="headerlink" href="#pour-macos" title="Lien vers cette rubrique">#</a></h4>
+<ol class="arabic simple">
+<li><p>Double-cliquer sur le fichier <code class="docutils literal notranslate"><span class="pre">.pkg</span></code> téléchargé.</p></li>
+<li><p>Suivre les instructions de l’assistant d’installation pour terminer la configuration.</p></li>
+</ol>
+</section>
+<section id="pour-linux">
+<h4><strong>Pour Linux</strong><a class="headerlink" href="#pour-linux" title="Lien vers cette rubrique">#</a></h4>
+<ol class="arabic">
+<li><p>Ouvrir un terminal.</p></li>
+<li><p>Exécuter les commandes suivantes :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">update</span>  
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">python3</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span>  
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="etape-3-verification-de-l-installation">
+<h3>Étape 3 : Vérification de l’installation<a class="headerlink" href="#etape-3-verification-de-l-installation" title="Lien vers cette rubrique">#</a></h3>
+<ol class="arabic">
+<li><p>Ouvrir un terminal ou une invite de commande.</p></li>
+<li><p>Exécuter la commande suivante pour vérifier la version installée de Python :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">--</span><span class="n">version</span>  
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="etape-4-installation-de-jupyter-notebook">
+<h3>Étape 4 : Installation de Jupyter Notebook<a class="headerlink" href="#etape-4-installation-de-jupyter-notebook" title="Lien vers cette rubrique">#</a></h3>
+<ol class="arabic">
+<li><p>Vérifier que <code class="docutils literal notranslate"><span class="pre">pip</span></code> (le gestionnaire de paquets Python) est installé. Si ce n’est pas le cas, l’installer avec :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">ensurepip</span> <span class="o">--</span><span class="n">upgrade</span>  
+</pre></div>
+</div>
+</li>
+<li><p>Installer Jupyter Notebook à l’aide de la commande suivante :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">notebook</span>  
+</pre></div>
+</div>
+</li>
+<li><p>Vérifier que Jupyter Notebook est correctement installé en exécutant :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span> <span class="n">notebook</span> <span class="o">--</span><span class="n">version</span>  
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="etape-5-lancement-de-jupyter-notebook">
+<h3>Étape 5 : Lancement de Jupyter Notebook<a class="headerlink" href="#etape-5-lancement-de-jupyter-notebook" title="Lien vers cette rubrique">#</a></h3>
+<ol class="arabic">
+<li><p>Ouvrir un terminal ou une invite de commande.</p></li>
+<li><p>Naviguer dans le répertoire où vous souhaitez enregistrer vos fichiers ou exécuter vos scripts. Pour changer de répertoire :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">chemin_du_repertoire</span>  
+</pre></div>
+</div>
+</li>
+<li><p>Démarrer Jupyter Notebook en tapant :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span> <span class="n">notebook</span>  
+</pre></div>
+</div>
+</li>
+<li><p>Une nouvelle page s’ouvrira automatiquement dans votre navigateur par défaut. Cette page contient l’interface Jupyter Notebook, qui permet de créer, ouvrir et exécuter des notebooks interactifs.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="etape-6-configuration-supplementaire">
+<h3>Étape 6 : Configuration supplémentaire<a class="headerlink" href="#etape-6-configuration-supplementaire" title="Lien vers cette rubrique">#</a></h3>
+<ol class="arabic">
+<li><p><strong>Mise à jour de pip</strong> pour garantir l’accès aux dernières versions des packages :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">pip</span>  
+</pre></div>
+</div>
+</li>
+<li><p><strong>Création d’environnements virtuels</strong> pour isoler vos projets :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="n">mon_env</span>  
+<span class="n">source</span> <span class="n">mon_env</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>  <span class="c1"># macOS/Linux  </span>
+<span class="n">mon_env</span>\<span class="n">Scripts</span>\<span class="n">activate</span>     <span class="c1"># Windows  </span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Installation de JupyterLab</strong>, une version avancée de Jupyter Notebook, avec :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">jupyterlab</span>  
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="google-colab">
+<h2>Google Colab<a class="headerlink" href="#google-colab" title="Lien vers cette rubrique">#</a></h2>
+<section id="presentation">
+<h3>Présentation<a class="headerlink" href="#presentation" title="Lien vers cette rubrique">#</a></h3>
+<p>Google Colab (Collaboratory) est une plateforme basée sur le cloud qui permet d’exécuter des notebooks Jupyter sans nécessiter d’installation locale de Python ou de Jupyter Notebook. Il est particulièrement utile pour les utilisateurs disposant de ressources matérielles limitées ou souhaitant collaborer en ligne.</p>
+</section>
+<section id="acces-a-google-colab">
+<h3>Accès à Google Colab<a class="headerlink" href="#acces-a-google-colab" title="Lien vers cette rubrique">#</a></h3>
+<ol class="arabic simple">
+<li><p>Ouvrir un navigateur web et accéder à <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>.</p></li>
+<li><p>Connectez-vous à votre compte Google si nécessaire.</p></li>
+</ol>
+</section>
+<section id="fonctionnalites-principales">
+<h3>Fonctionnalités principales<a class="headerlink" href="#fonctionnalites-principales" title="Lien vers cette rubrique">#</a></h3>
+<ul class="simple">
+<li><p><strong>Exécution de notebooks Python</strong> : Vous pouvez écrire et exécuter du code Python directement dans l’interface.</p></li>
+<li><p><strong>Accès au matériel GPU/TPU</strong> : Pour les calculs intensifs, activez un GPU ou TPU depuis <strong>Runtime &gt; Change runtime type &gt; Hardware accelerator</strong>.</p></li>
+<li><p><strong>Collaboration en temps réel</strong> : Partagez vos notebooks avec d’autres utilisateurs pour travailler simultanément.</p></li>
+</ul>
+</section>
+<section id="chargement-de-fichiers-locaux">
+<h3>Chargement de fichiers locaux<a class="headerlink" href="#chargement-de-fichiers-locaux" title="Lien vers cette rubrique">#</a></h3>
+<p>Pour utiliser des fichiers locaux dans Google Colab, téléversez-les directement via l’interface ou montez votre Google Drive avec la commande suivante :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>  
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>  
+</pre></div>
+</div>
+</section>
+<section id="exportation">
+<h3>Exportation<a class="headerlink" href="#exportation" title="Lien vers cette rubrique">#</a></h3>
+<p>Les notebooks créés peuvent être téléchargés au format <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> ou <code class="docutils literal notranslate"><span class="pre">.py</span></code> depuis <strong>File &gt; Download</strong>.</p>
+<hr class="docutils" />
+<p>Un Jupyter Notebook est constitué de plusieurs « cellules, » empilées sur la page de haut en bas. Les cellules peuvent contenir du texte ou du code. Vous pouvez changer le type d’une cellule en utilisant le menu « Cell » en haut de la page ; allez dans <code class="docutils literal notranslate"><span class="pre">Cell</span> <span class="pre">&gt;</span> <span class="pre">Cell</span> <span class="pre">Type</span></code> et sélectionnez soit <code class="docutils literal notranslate"><span class="pre">Code</span></code> pour le code Python, soit <code class="docutils literal notranslate"><span class="pre">Markdown</span></code> pour le texte. (Vous pouvez également changer cela pour la cellule actuelle en utilisant le menu déroulant dans la barre d’outils.)</p>
+</section>
+</section>
+<section id="cellules-de-texte">
+<h2>Cellules de texte<a class="headerlink" href="#cellules-de-texte" title="Lien vers cette rubrique">#</a></h2>
+<p>Créez une nouvelle cellule, changez son type en <code class="docutils literal notranslate"><span class="pre">Markdown</span></code>, tapez du texte et appuyez sur <code class="docutils literal notranslate"><span class="pre">Ctrl-Enter</span></code>. Jupyter Notebook va « rendre » le texte et l’afficher sur la page au format rendu. Vous pouvez appuyer sur <code class="docutils literal notranslate"><span class="pre">Enter</span></code> ou cliquer dans la cellule pour en modifier à nouveau le contenu. Le texte dans les cellules <code class="docutils literal notranslate"><span class="pre">Markdown</span></code> est rendu selon un ensemble de conventions appelé Markdown. Markdown est un langage simple pour formater le texte avec des informations de mise en forme de base (comme le gras, l’italique, les hyperliens, les tableaux, etc.)<a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
+</section>
+<hr class="docutils" />
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Lien vers cette rubrique">#</a></h2>
+</section>
+<section id="cellules-de-code">
+<h2>Cellules de code<a class="headerlink" href="#cellules-de-code" title="Lien vers cette rubrique">#</a></h2>
+<p>Vous pouvez également appuyer sur <code class="docutils literal notranslate"><span class="pre">Alt-Enter</span></code> pour rendre la cellule actuelle et créer une nouvelle cellule. Par défaut, les nouvelles cellules seront des cellules de type <code class="docutils literal notranslate"><span class="pre">Code</span></code>. Essayez maintenant !</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ceci est une cellule de code.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tout code Python que vous tapez dans cette cellule sera exécuté lorsque vous appuierez sur le bouton &#39;Run&#39;,&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ou lorsque vous appuierez sur Ctrl-Enter.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Si le code retourne quelque chose, ou s&#39;il produit une sortie, cette sortie sera&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;affichée sous la cellule après son exécution.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Si votre code Python génère une erreur, l&#39;erreur sera affichée en plus&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;de toute sortie déjà produite.&quot;</span><span class="p">)</span>
+
+<span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Si votre code Python génère une erreur, l&#39;erreur sera affichée en plus
+de toute sortie déjà produite.
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ZeroDivisionError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Si votre code Python génère une erreur, l&#39;erreur sera affichée en plus&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;de toute sortie déjà produite.&quot;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
+
+<span class="ne">ZeroDivisionError</span>: division by zero
+</pre></div>
+</div>
+</div>
+</div>
+<p>Toutes les variables que vous définissez ou les modules que vous importez dans une cellule de code seront disponibles dans les cellules de code suivantes. Commencez par ceci :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="n">stuff</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cheddar&quot;</span><span class="p">,</span> <span class="s2">&quot;daguerréotype&quot;</span><span class="p">,</span> <span class="s2">&quot;éléphant&quot;</span><span class="p">,</span> <span class="s2">&quot;marché aux puces&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>… et dans les cellules suivantes, vous pouvez faire ceci :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">stuff</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>éléphant
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="raccourcis-clavier">
+<h2>Raccourcis clavier<a class="headerlink" href="#raccourcis-clavier" title="Lien vers cette rubrique">#</a></h2>
+<p>Comme mentionné ci-dessus, <code class="docutils literal notranslate"><span class="pre">Ctrl-Enter</span></code> exécute la cellule actuelle ; <code class="docutils literal notranslate"><span class="pre">Alt-Enter</span></code> exécute la cellule actuelle et crée une nouvelle cellule. <code class="docutils literal notranslate"><span class="pre">Enter</span></code> commence l’édition de la cellule actuellement sélectionnée. Pour quitter l’édition d’une cellule, appuyez sur <code class="docutils literal notranslate"><span class="pre">Esc</span></code>. Si le curseur n’est actif dans aucune cellule (c’est-à-dire après avoir appuyé sur <code class="docutils literal notranslate"><span class="pre">Esc</span></code>), plusieurs autres raccourcis clavier sont disponibles :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">m</span></code> convertit la cellule sélectionnée en cellule Markdown</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">b</span></code> insère une nouvelle cellule en dessous de la cellule sélectionnée</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code> « coupe » la cellule sélectionnée ; <code class="docutils literal notranslate"><span class="pre">v</span></code> colle une cellule précédemment coupée en dessous de la cellule sélectionnée</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">h</span></code> affiche un écran d’aide avec de nombreux autres raccourcis.</p></li>
+</ul>
+</section>
+<section id="sauvegarder-votre-travail">
+<h2>Sauvegarder votre travail<a class="headerlink" href="#sauvegarder-votre-travail" title="Lien vers cette rubrique">#</a></h2>
+<p>Appuyez sur <code class="docutils literal notranslate"><span class="pre">Cmd-S</span></code> à tout moment pour sauvegarder votre notebook. Jupyter Notebook sauvegarde également automatiquement de temps à autre. Assurez-vous de donner à votre notebook un titre descriptif en cliquant sur « Untitled0 » en haut de la page et en remplaçant le texte en conséquence. Les notebooks que vous sauvegardez seront disponibles sur votre serveur chaque fois que vous vous connecterez à nouveau, quel que soit l’endroit où vous vous connectez.</p>
+<p>Vous pouvez « télécharger » votre notebook dans divers formats via <code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">&gt;</span> <span class="pre">Download</span> <span class="pre">as</span></code>. Vous pouvez télécharger votre notebook sous forme de fichier HTML statique (par exemple, pour le mettre en ligne sur un site Web) ou sous forme de fichier <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>, que vous pouvez partager avec d’autres personnes ayant Jupyter Notebook ou rendre disponible en ligne via, par exemple, <a class="reference external" href="http://nbviewer.ipython.org/">nbviewer</a>.</p>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Voici un <a class="reference external" href="http://markdowntutorial.com/">tutoriel</a>. Vous apprendrez également Markdown en détail dans le cours Foundations.</p>
+</aside>
+</aside>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title">Analyse numérique et programmation scientifique</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="pythontuto.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">suivant</p>
+        <p class="prev-next-title">Initiation à Python</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-de-python-et-jupyter-notebook">Installation de Python et Jupyter Notebook</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-1-telechargement-de-python">Étape 1 : Téléchargement de Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-2-installation-de-python">Étape 2 : Installation de Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-windows"><strong>Pour Windows</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-macos"><strong>Pour macOS</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pour-linux"><strong>Pour Linux</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-3-verification-de-l-installation">Étape 3 : Vérification de l’installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-4-installation-de-jupyter-notebook">Étape 4 : Installation de Jupyter Notebook</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-5-lancement-de-jupyter-notebook">Étape 5 : Lancement de Jupyter Notebook</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etape-6-configuration-supplementaire">Étape 6 : Configuration supplémentaire</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-colab">Google Colab</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#presentation">Présentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acces-a-google-colab">Accès à Google Colab</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fonctionnalites-principales">Fonctionnalités principales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chargement-de-fichiers-locaux">Chargement de fichiers locaux</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exportation">Exportation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellules-de-texte">Cellules de texte</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellules-de-code">Cellules de code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#raccourcis-clavier">Raccourcis clavier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sauvegarder-votre-travail">Sauvegarder votre travail</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Par Iaousse M'barek
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

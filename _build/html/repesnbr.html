@@ -1,0 +1,914 @@
+
+<!DOCTYPE html>
+
+
+<html lang="fr" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Représentation des nombres en calcul scientifique &#8212; Cours Analyse Numerique</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=041d0952"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"TeX": {"Macros": {"Z": "\\mathbb{Z}", "V": "V", "N": "\\mathbb{N}", "C": "\\mathbb{C}", "Q": "\\mathbb{Q}", "K": "\\mathbb{K}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"], "R": ["\\mathbb{R}"], "B": ["\\mathcal{B}"], "norm": ["{\\Vert#1\\Vert}", 1], "abs": ["{\\left|#1\\right|}", 1], "coloneqq": ["{:=}"], "eqqcolon": ["{=:}"], "emph": ["\\pmb#1", 1], "tr": "\\operatorname{Spur}", "lin": "\\operatorname{lin}", "dv": "\\mathrm{div}~", "rot": "\\mathrm{rot}~", "Dim": "\\operatorname{dim}", "diag": "\\operatorname{diag}", "Kern": "\\operatorname{Kern}", "Bild": "\\operatorname{Bild}", "Im": "\\operatorname{Im}", "Rang": "\\operatorname{Rang}", "GL": "\\operatorname{GL}", "Eig": "\\operatorname{Eig}", "End": "\\operatorname{End}", "Hau": "\\operatorname{Haupt}", "mymathbb": ["\\boldsymbol{#1}", 1], "idx": "\\mathrm{d}x", "d": "\\mathrm{d}", "i": "\\mathrm{i}", "x": "\\mathbf{x}", "sign": "\\mathrm{sign}", "vec": ["\\mathbf{#1}", 1], "veczwei": ["\\begin{pmatrix} #1 \\\\ #2 \\end{pmatrix}", 2], "M": "\\mathcal{M}", "S": "\\mathbb{S}", "bone": "\\unicode{x1D7D9}", "Re": "\\mathrm{Re}", "Um": "\\operatorname{Um}", "Res": "\\operatorname{Res}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'repesnbr';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="prev" title="Représentation des nombres en calcul scientifique" href="representation-nombres1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="fr"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Cours Analyse Numerique - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="Cours Analyse Numerique - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Recherche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="jupyter-tutor.html">Initiation à Jupyter Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythontuto.html">Initiation à Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="representation-nombres1.html">Représentation des nombres en calcul scientifique</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Représentation des nombres en calcul scientifique</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Dépôt source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Frepesnbr.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Ouvrez un problème"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Téléchargez cette page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/repesnbr.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Télécharger le fichier source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimer au format PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Mode plein écran"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Représentation des nombres en calcul scientifique</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Représentation des nombres en calcul scientifique</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-la-representation-des-nombres">Introduction : La représentation des nombres</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximation-des-constantes-mathematiques">Approximation des constantes mathématiques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-nombre-d-euler-e">Le nombre d’Euler <span class="math notranslate nohighlight">\(e\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-approximations-numeriques-de-e">Exemple : Approximations numériques de <span class="math notranslate nohighlight">\(e\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#analyse">Analyse :</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#illustration-graphique-convergence-vers-e">Illustration graphique : Convergence vers <span class="math notranslate nohighlight">\(e\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-fonction-exponentielle-e-x">La fonction exponentielle <span class="math notranslate nohighlight">\(e^x\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-calcul-de-e-x-avec-une-tolerance-fixee">Exemple : Calcul de <span class="math notranslate nohighlight">\(e^x\)</span> avec une tolérance fixée</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#norme-ieee-754-representation-des-nombres-flottants">Norme IEEE 754 : Représentation des nombres flottants</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-a-la-representation-binaire-des-nombres-reels">Introduction à la Représentation Binaire des Nombres Réels</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-generale-d-un-nombre-flottant">Structure Générale d’un Nombre Flottant</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#norme-ieee-754-types-de-precision">Norme IEEE 754 : Types de Précision</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-precision-float32">1. Simple Précision (float32)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#double-precision-float64">2. Double Précision (float64)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisation-des-erreurs-de-precision">Visualisation des Erreurs de Précision</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparaison-float32-vs-float64">Comparaison float32 vs float64</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-d-erreurs-numeriques">Types d’Erreurs Numériques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#erreurs-d-arrondi">1. Erreurs d’Arrondi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#erreurs-d-annulation">2. Erreurs d’Annulation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercices-d-evaluation">Exercices d’Évaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercice-1-analyse-de-precision">Exercice 1 : Analyse de Précision</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercice-2-propagation-des-erreurs">Exercice 2 : Propagation des Erreurs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercice-3-conception-d-un-visualisateur-d-erreurs">Exercice 3 : Conception d’un Visualisateur d’Erreurs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recommandations">Recommandations :</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="representation-des-nombres-en-calcul-scientifique">
+<h1>Représentation des nombres en calcul scientifique<a class="headerlink" href="#representation-des-nombres-en-calcul-scientifique" title="Lien vers cette rubrique">#</a></h1>
+<p>Dans ce chapitre, nous explorons comment les nombres sont représentés dans les ordinateurs, les impacts de ces représentations sur les calculs numériques, et les erreurs qu’elles peuvent générer. Les exemples pratiques en Python illustrent ces concepts.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importation des bibliothèques nécessaires</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<section id="introduction-la-representation-des-nombres">
+<h2>Introduction : La représentation des nombres<a class="headerlink" href="#introduction-la-representation-des-nombres" title="Lien vers cette rubrique">#</a></h2>
+<p>Les ordinateurs utilisent des approximations pour représenter les nombres réels. Cette limitation est due à la capacité finie de la mémoire. Cela entraîne des erreurs d’arrondi, des pertes de précision, et parfois des résultats inattendus lors des calculs complexes.</p>
+<ul class="simple">
+<li><p><strong>Limite fondamentale</strong> : Un nombre réel, en raison de sa nature infinie en base 10, est représenté de manière tronquée ou arrondie en base 2.</p></li>
+<li><p><strong>Conséquences</strong> :</p>
+<ul>
+<li><p><strong>Erreurs d’arrondi</strong> : Lorsqu’un nombre ne peut être représenté exactement, il est arrondi à la valeur la plus proche.</p></li>
+<li><p><strong>Erreurs d’annulation</strong> : Ces erreurs se produisent lorsqu’on soustrait deux nombres presque égaux, ce qui amplifie l’effet des approximations.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Exemple : Effet d’une erreur d’annulation</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exemple d&#39;erreur d&#39;annulation</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">1.0000000001</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">1.0000000000</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Résultat attendu : </span><span class="si">{</span><span class="mf">1e-10</span><span class="si">}</span><span class="s2">, Résultat calculé : </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="approximation-des-constantes-mathematiques">
+<h2>Approximation des constantes mathématiques<a class="headerlink" href="#approximation-des-constantes-mathematiques" title="Lien vers cette rubrique">#</a></h2>
+<section id="le-nombre-d-euler-e">
+<h3>Le nombre d’Euler <span class="math notranslate nohighlight">\(e\)</span><a class="headerlink" href="#le-nombre-d-euler-e" title="Lien vers cette rubrique">#</a></h3>
+<p>Le nombre d’Euler <span class="math notranslate nohighlight">\(e\)</span> est défini par :</p>
+<div class="math notranslate nohighlight">
+\[
+e = \lim_{n \to \infty} \left( 1 + \frac{1}{n} \right)^n
+\]</div>
+<p>En pratique, <span class="math notranslate nohighlight">\(e\)</span> est calculé pour une valeur finie de <span class="math notranslate nohighlight">\(n\)</span>. Cela introduit des erreurs liées à la précision numérique.</p>
+<section id="exemple-approximations-numeriques-de-e">
+<h4>Exemple : Approximations numériques de <span class="math notranslate nohighlight">\(e\)</span><a class="headerlink" href="#exemple-approximations-numeriques-de-e" title="Lien vers cette rubrique">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Approximation du nombre e</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;n </span><span class="se">\t\t</span><span class="s1"> e_n </span><span class="se">\t\t\t</span><span class="s1"> erreur relative&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">i</span>
+    <span class="n">e_n</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="o">**</span> <span class="n">n</span>
+    <span class="n">erreur</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">e_n</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s1">10</span><span class="si">}</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">{</span><span class="n">e_n</span><span class="si">:</span><span class="s1">.15f</span><span class="si">}</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">{</span><span class="n">erreur</span><span class="si">:</span><span class="s1">.15e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="analyse">
+<h4>Analyse :<a class="headerlink" href="#analyse" title="Lien vers cette rubrique">#</a></h4>
+<ul class="simple">
+<li><p>Plus <span class="math notranslate nohighlight">\(n\)</span> augmente, plus <span class="math notranslate nohighlight">\(e_n\)</span> converge vers la valeur réelle de <span class="math notranslate nohighlight">\(e\)</span>.</p></li>
+<li><p>Cependant, des limitations apparaissent pour de très grands <span class="math notranslate nohighlight">\(n\)</span> en raison de la précision numérique disponible.</p></li>
+</ul>
+<p><strong>Exercice</strong> :</p>
+<ol class="arabic simple">
+<li><p>Testez le calcul de <span class="math notranslate nohighlight">\(e\)</span> pour des valeurs encore plus grandes de <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p>Observez si des anomalies se produisent au-delà d’une certaine limite.</p></li>
+</ol>
+</section>
+<section id="illustration-graphique-convergence-vers-e">
+<h4>Illustration graphique : Convergence vers <span class="math notranslate nohighlight">\(e\)</span><a class="headerlink" href="#illustration-graphique-convergence-vers-e" title="Lien vers cette rubrique">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Illustration graphique de la convergence</span>
+<span class="n">n_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">)]</span>
+<span class="n">e_values</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="o">**</span> <span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">n_values</span><span class="p">]</span>
+<span class="n">errors</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">e</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">e_values</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n_values</span><span class="p">,</span> <span class="n">e_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Approximation de e&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Valeur réelle de e&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Convergence de l&#39;approximation de e&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Valeurs de n (log scale)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Valeur approchée de e&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="la-fonction-exponentielle-e-x">
+<h3>La fonction exponentielle <span class="math notranslate nohighlight">\(e^x\)</span><a class="headerlink" href="#la-fonction-exponentielle-e-x" title="Lien vers cette rubrique">#</a></h3>
+<p>La fonction exponentielle est définie par la série infinie suivante :</p>
+<div class="math notranslate nohighlight">
+\[
+e^x = \sum_{k=0}^\infty \frac{x^k}{k!}
+\]</div>
+<p>En pratique, l’ordinateur calcule une <strong>série tronquée</strong> :</p>
+<div class="math notranslate nohighlight">
+\[
+s_i(x) = \sum_{k=0}^i \frac{x^k}{k!}
+\]</div>
+<section id="exemple-calcul-de-e-x-avec-une-tolerance-fixee">
+<h4>Exemple : Calcul de <span class="math notranslate nohighlight">\(e^x\)</span> avec une tolérance fixée<a class="headerlink" href="#exemple-calcul-de-e-x-avec-une-tolerance-fixee" title="Lien vers cette rubrique">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">approx_exp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">):</span>
+    <span class="n">somme</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">terme</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">terme</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">tol</span><span class="p">:</span>
+        <span class="n">terme</span> <span class="o">*=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">k</span>
+        <span class="n">somme</span> <span class="o">+=</span> <span class="n">terme</span>
+        <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">somme</span>
+
+<span class="c1"># Comparaison pour x=1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Valeur calculée : </span><span class="si">{</span><span class="n">approx_exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Valeur réelle (numpy) : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Analyse</strong> :</p>
+<ul class="simple">
+<li><p>Le nombre de termes requis dépend de la tolérance choisie.</p></li>
+<li><p>Des erreurs d’arrondi peuvent se cumuler pour des valeurs très grandes ou très petites de <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+<p><strong>Exercice</strong> :</p>
+<ol class="arabic simple">
+<li><p>Écrivez une fonction pour comparer la série tronquée et la valeur réelle de <span class="math notranslate nohighlight">\(e^x\)</span>.</p></li>
+<li><p>Testez pour différents <span class="math notranslate nohighlight">\(x\)</span> et différentes tolérances.</p></li>
+</ol>
+</section>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="norme-ieee-754-representation-des-nombres-flottants">
+<h1>Norme IEEE 754 : Représentation des nombres flottants<a class="headerlink" href="#norme-ieee-754-representation-des-nombres-flottants" title="Lien vers cette rubrique">#</a></h1>
+<section id="introduction-a-la-representation-binaire-des-nombres-reels">
+<h2>Introduction à la Représentation Binaire des Nombres Réels<a class="headerlink" href="#introduction-a-la-representation-binaire-des-nombres-reels" title="Lien vers cette rubrique">#</a></h2>
+<p>La représentation des nombres réels en informatique est un défi complexe qui nécessite une compréhension approfondie des principes de base de la représentation binaire.</p>
+<section id="structure-generale-d-un-nombre-flottant">
+<h3>Structure Générale d’un Nombre Flottant<a class="headerlink" href="#structure-generale-d-un-nombre-flottant" title="Lien vers cette rubrique">#</a></h3>
+<p>Un nombre flottant selon la norme IEEE 754 est composé de trois parties :</p>
+<ul class="simple">
+<li><p><strong>Bit de signe</strong> : Indique si le nombre est positif ou négatif</p></li>
+<li><p><strong>Exposant</strong> : Représente l’échelle du nombre</p></li>
+<li><p><strong>Mantisse (ou fraction)</strong> : Représente la précision du nombre</p></li>
+</ul>
+</section>
+</section>
+<section id="norme-ieee-754-types-de-precision">
+<h2>Norme IEEE 754 : Types de Précision<a class="headerlink" href="#norme-ieee-754-types-de-precision" title="Lien vers cette rubrique">#</a></h2>
+<section id="simple-precision-float32">
+<h3>1. Simple Précision (float32)<a class="headerlink" href="#simple-precision-float32" title="Lien vers cette rubrique">#</a></h3>
+<ul class="simple">
+<li><p><strong>Structure</strong> : 32 bits</p>
+<ul>
+<li><p>1 bit de signe</p></li>
+<li><p>8 bits pour l’exposant</p></li>
+<li><p>23 bits pour la mantisse</p></li>
+</ul>
+</li>
+<li><p><strong>Caractéristiques</strong> :</p>
+<ul>
+<li><p>Plage : <span class="math notranslate nohighlight">\(\pm 10^{-38}\)</span> à <span class="math notranslate nohighlight">\(\pm 10^{38}\)</span></p></li>
+<li><p>Précision : environ 7 décimales</p></li>
+<li><p>Économe en mémoire</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="double-precision-float64">
+<h3>2. Double Précision (float64)<a class="headerlink" href="#double-precision-float64" title="Lien vers cette rubrique">#</a></h3>
+<ul class="simple">
+<li><p><strong>Structure</strong> : 64 bits</p>
+<ul>
+<li><p>1 bit de signe</p></li>
+<li><p>11 bits pour l’exposant</p></li>
+<li><p>52 bits pour la mantisse</p></li>
+</ul>
+</li>
+<li><p><strong>Caractéristiques</strong> :</p>
+<ul>
+<li><p>Plage : <span class="math notranslate nohighlight">\(\pm 10^{-308}\)</span> à <span class="math notranslate nohighlight">\(\pm 10^{308}\)</span></p></li>
+<li><p>Précision : environ 15-17 décimales</p></li>
+<li><p>Standard en Python et calcul scientifique</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">analyse_float_types</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyse détaillée des types de nombres flottants&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Analyse des types float en Python :&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;float32 - Plage : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="si">}</span><span class="s2"> à </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;float64 - Plage : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="si">}</span><span class="s2"> à </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Précision :&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;float32 : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">precision</span><span class="si">}</span><span class="s2"> décimales&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;float64 : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">precision</span><span class="si">}</span><span class="s2"> décimales&quot;</span><span class="p">)</span>
+
+<span class="n">analyse_float_types</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="visualisation-des-erreurs-de-precision">
+<h2>Visualisation des Erreurs de Précision<a class="headerlink" href="#visualisation-des-erreurs-de-precision" title="Lien vers cette rubrique">#</a></h2>
+<section id="comparaison-float32-vs-float64">
+<h3>Comparaison float32 vs float64<a class="headerlink" href="#comparaison-float32-vs-float64" title="Lien vers cette rubrique">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">precision_comparison</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Démonstration des différences de précision&quot;&quot;&quot;</span>
+    <span class="n">x_32</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">y_32</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="mf">1e-8</span><span class="p">)</span>
+    <span class="n">x_64</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">y_64</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="mf">1e-8</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Comparaison de précision :&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;float32 : 1.0 + 1e-8 = </span><span class="si">{</span><span class="n">x_32</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y_32</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;float64 : 1.0 + 1e-8 = </span><span class="si">{</span><span class="n">x_64</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y_64</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Valeur théorique    : </span><span class="si">{</span><span class="mf">1.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1e-8</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">precision_comparison</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="types-d-erreurs-numeriques">
+<h2>Types d’Erreurs Numériques<a class="headerlink" href="#types-d-erreurs-numeriques" title="Lien vers cette rubrique">#</a></h2>
+<section id="erreurs-d-arrondi">
+<h3>1. Erreurs d’Arrondi<a class="headerlink" href="#erreurs-d-arrondi" title="Lien vers cette rubrique">#</a></h3>
+<p>Les erreurs d’arrondi surviennent lorsqu’un nombre réel ne peut être représenté exactement en binaire.</p>
+</section>
+<section id="erreurs-d-annulation">
+<h3>2. Erreurs d’Annulation<a class="headerlink" href="#erreurs-d-annulation" title="Lien vers cette rubrique">#</a></h3>
+<p>Situation où la soustraction de nombres très proches amplifie les imprécisions.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">demonstration_annulation</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Illustration des erreurs d&#39;annulation&quot;&quot;&quot;</span>
+    <span class="c1"># Calcul problématique : soustraction de nombres très proches</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mf">1.0000000001</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mf">1.0000000000</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Erreur d&#39;annulation :&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a = </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;b = </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a - b = </span><span class="si">{</span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Valeur attendue : 1e-10&quot;</span><span class="p">)</span>
+
+<span class="n">demonstration_annulation</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="exercices-d-evaluation">
+<h2>Exercices d’Évaluation<a class="headerlink" href="#exercices-d-evaluation" title="Lien vers cette rubrique">#</a></h2>
+<section id="exercice-1-analyse-de-precision">
+<h3>Exercice 1 : Analyse de Précision<a class="headerlink" href="#exercice-1-analyse-de-precision" title="Lien vers cette rubrique">#</a></h3>
+<p><strong>Objectif</strong> : Comprendre l’impact de la précision sur les calculs.</p>
+<ol class="arabic simple">
+<li><p>Écrivez un programme qui :</p>
+<ul class="simple">
+<li><p>Crée deux tableaux de nombres avec float32 et float64</p></li>
+<li><p>Calcule leur somme</p></li>
+<li><p>Compare les résultats</p></li>
+<li><p>Identifie les différences de précision</p></li>
+</ul>
+</li>
+<li><p>Répondez aux questions suivantes :</p>
+<ul class="simple">
+<li><p>Quand utiliseriez-vous float32 plutôt que float64 ?</p></li>
+<li><p>Quels sont les risques de perte de précision ?</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="exercice-2-propagation-des-erreurs">
+<h3>Exercice 2 : Propagation des Erreurs<a class="headerlink" href="#exercice-2-propagation-des-erreurs" title="Lien vers cette rubrique">#</a></h3>
+<p><strong>Objectif</strong> : Observer la propagation des erreurs dans une série de calculs.</p>
+<ol class="arabic simple">
+<li><p>Implémentez une fonction qui :</p>
+<ul class="simple">
+<li><p>Prend une série de nombres</p></li>
+<li><p>Effectue des opérations successives (addition, multiplication)</p></li>
+<li><p>Calcule l’erreur cumulative</p></li>
+</ul>
+</li>
+<li><p>Testez avec :</p>
+<ul class="simple">
+<li><p>Une série de nombres très grands</p></li>
+<li><p>Une série de nombres très petits</p></li>
+<li><p>Une série de nombres alternant entre grand et petit</p></li>
+</ul>
+</li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">propagation_erreurs</span><span class="p">(</span><span class="n">serie</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="s1">&#39;addition&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analyse la propagation des erreurs dans une série de calculs</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">    - serie (list/np.array): Série de nombres à traiter</span>
+<span class="sd">    - operation (str): Type d&#39;opération (&#39;addition&#39; ou &#39;multiplication&#39;)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    - Résultats et analyse des erreurs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Votre implémentation ici</span>
+    <span class="k">pass</span>
+
+<span class="c1"># Exemple d&#39;utilisation</span>
+<span class="n">numeros_grands</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">]</span>
+<span class="n">numeros_alternants</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e10</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="mf">1e10</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Série de nombres grands :&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">propagation_erreurs</span><span class="p">(</span><span class="n">numeros_grands</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="exercice-3-conception-d-un-visualisateur-d-erreurs">
+<h3>Exercice 3 : Conception d’un Visualisateur d’Erreurs<a class="headerlink" href="#exercice-3-conception-d-un-visualisateur-d-erreurs" title="Lien vers cette rubrique">#</a></h3>
+<p><strong>Objectif</strong> : Créer une visualisation des erreurs de précision.</p>
+<ol class="arabic simple">
+<li><p>Développez un script qui :</p>
+<ul class="simple">
+<li><p>Génère une série de calculs avec différentes précisions</p></li>
+<li><p>Trace un graphique montrant l’accumulation des erreurs</p></li>
+<li><p>Compare float32, float64, et éventuellement decimal</p></li>
+</ul>
+</li>
+</ol>
+<p>Conseils :</p>
+<ul class="simple">
+<li><p>Utilisez matplotlib pour la visualisation</p></li>
+<li><p>Annotez clairement les sources d’erreurs</p></li>
+<li><p>Montrez l’évolution des erreurs sur plusieurs itérations</p></li>
+</ul>
+</section>
+</section>
+<section id="recommandations">
+<h2>Recommandations :<a class="headerlink" href="#recommandations" title="Lien vers cette rubrique">#</a></h2>
+<ul class="simple">
+<li><p>Utilisez float64 par défaut</p></li>
+<li><p>Soyez conscient des limitations de précision</p></li>
+<li><p>Utilisez des bibliothèques comme <code class="docutils literal notranslate"><span class="pre">decimal</span></code> pour une précision accrue si nécessaire</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="representation-nombres1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title">Représentation des nombres en calcul scientifique</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Représentation des nombres en calcul scientifique</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-la-representation-des-nombres">Introduction : La représentation des nombres</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximation-des-constantes-mathematiques">Approximation des constantes mathématiques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-nombre-d-euler-e">Le nombre d’Euler <span class="math notranslate nohighlight">\(e\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-approximations-numeriques-de-e">Exemple : Approximations numériques de <span class="math notranslate nohighlight">\(e\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#analyse">Analyse :</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#illustration-graphique-convergence-vers-e">Illustration graphique : Convergence vers <span class="math notranslate nohighlight">\(e\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-fonction-exponentielle-e-x">La fonction exponentielle <span class="math notranslate nohighlight">\(e^x\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exemple-calcul-de-e-x-avec-une-tolerance-fixee">Exemple : Calcul de <span class="math notranslate nohighlight">\(e^x\)</span> avec une tolérance fixée</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#norme-ieee-754-representation-des-nombres-flottants">Norme IEEE 754 : Représentation des nombres flottants</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-a-la-representation-binaire-des-nombres-reels">Introduction à la Représentation Binaire des Nombres Réels</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-generale-d-un-nombre-flottant">Structure Générale d’un Nombre Flottant</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#norme-ieee-754-types-de-precision">Norme IEEE 754 : Types de Précision</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-precision-float32">1. Simple Précision (float32)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#double-precision-float64">2. Double Précision (float64)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisation-des-erreurs-de-precision">Visualisation des Erreurs de Précision</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparaison-float32-vs-float64">Comparaison float32 vs float64</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-d-erreurs-numeriques">Types d’Erreurs Numériques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#erreurs-d-arrondi">1. Erreurs d’Arrondi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#erreurs-d-annulation">2. Erreurs d’Annulation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercices-d-evaluation">Exercices d’Évaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercice-1-analyse-de-precision">Exercice 1 : Analyse de Précision</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercice-2-propagation-des-erreurs">Exercice 2 : Propagation des Erreurs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercice-3-conception-d-un-visualisateur-d-erreurs">Exercice 3 : Conception d’un Visualisateur d’Erreurs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recommandations">Recommandations :</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Par Iaousse M'barek
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
